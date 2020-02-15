@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="favorite">Vormerken</string>
+    <string name="un_favorite">Vergessen</string>
+    <string name="price_with_value"><b>Preis: </b>%s</string>
+</resources>

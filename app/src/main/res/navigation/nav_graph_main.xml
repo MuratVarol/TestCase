@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_main"
+    app:startDestination="@id/productListFragment">
+    <fragment
+        android:id="@+id/productListFragment"
+        android:name="com.varol.testcase.internal.screen.product.product_list.ProductListFragment"
+        android:label="ProductListFragment"
+        app:enterAnim="@anim/enter_presentation"
+        app:exitAnim="@anim/exit_presentation"
+        app:popEnterAnim="@anim/pop_enter_presentation"
+        app:popExitAnim="@anim/pop_exit_presentation"
+        tools:layout="@layout/fragment_product_list">
+        <action
+            android:id="@+id/action_productListFragment_to_productDetailFragment"
+            app:destination="@id/productDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/productDetailFragment"
+        android:name="com.varol.testcase.internal.screen.product.product_detail.ProductDetailFragment"
+        android:label="ProductDetailFragment"
+        app:enterAnim="@anim/enter_presentation"
+        app:exitAnim="@anim/exit_presentation"
+        app:popEnterAnim="@anim/pop_enter_presentation"
+        app:popExitAnim="@anim/pop_exit_presentation"
+        tools:layout="@layout/fragment_product_detail">
+
+        <argument
+            android:name="selectedProduct"
+            app:argType="com.varol.testcase.internal.screen.product.ProductUiModel" />
+
+    </fragment>
+</navigation>
