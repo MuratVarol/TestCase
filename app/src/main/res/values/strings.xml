@@ -1,8 +1,12 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingTranslation">>
     <string name="favorite">Favorite</string>
     <string name="un_favorite">Un-Favorite</string>
     <string name="price_with_value"><b>Price: </b>%s</string>
     <string name="retry">Retry</string>
+    <string name="all">All</string>
+    <string name="available">Availables</string>
+    <string name="favorites">Favorites</string>
 
     <!-- ERROR MESSAGES -->
     <string name="error_message_invalid_response">Server response is not valid</string>

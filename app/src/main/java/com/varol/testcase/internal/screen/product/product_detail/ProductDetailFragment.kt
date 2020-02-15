@@ -28,7 +28,7 @@ class ProductDetailFragment :
         }
 
         binding.btnFavorite.setOnClickListener {
-            viewModel.allProducts.value?.find { product ->
+            viewModel.selectedProducts.value?.find { product ->
                 product.id == args.selectedProduct.id
             }
                 ?.apply {
@@ -36,7 +36,7 @@ class ProductDetailFragment :
                         this.let {
                             model.isFavorite = it.isFavorite.not()
                             setFavoriteText(model.isFavorite)
-                            viewModel.allProducts.notifyDataChange()
+                            viewModel.selectedProducts.notifyDataChange()
                         }
                     }
                 }

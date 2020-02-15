@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -10,15 +11,57 @@
     </data>
 
     <com.varol.testcase.internal.view.RootConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:progressVisibility="@{viewModel.isLoading}">
 
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_medium"
+            android:onClick="@{()-> viewModel.getAll()}"
+            android:text="@string/all"
+            app:layout_constraintEnd_toStartOf="@+id/btn_available"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibilityNot="@{viewModel.isEmptyResult}"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_available"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_medium"
+            android:onClick="@{()-> viewModel.getAvailables()}"
+            android:text="@string/available"
+            app:layout_constraintEnd_toStartOf="@+id/btn_favs"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btn_all"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibilityNot="@{viewModel.isEmptyResult}"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_favs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_medium"
+            android:onClick="@{()-> viewModel.getFavorites()}"
+            android:text="@string/favorites"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btn_available"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibilityNot="@{viewModel.isEmptyResult}"/>
+
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/srl"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/margin_large"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_all"
             app:onRefreshListener="@{() -> viewModel.fetchAllProducts()}"
             app:refreshing="@{viewModel.isLoading}">
 
@@ -28,14 +71,14 @@
                 android:layout_height="match_parent"
                 android:layout_marginBottom="@dimen/margin_medium"
                 app:itemLayoutId="@{@layout/layout_product_item}"
-                app:itemList="@{viewModel.allProducts}"
-                app:viewModel="@{viewModel}"
-                app:visibilityNot="@{viewModel.isEmptyResult}"
+                app:itemList="@{viewModel.selectedProducts}"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:viewModel="@{viewModel}"
+                app:visibilityNot="@{viewModel.isEmptyResult}"
                 tools:listitem="@layout/layout_product_item" />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
@@ -44,12 +87,12 @@
             android:id="@+id/img_error"
             android:layout_width="300dp"
             android:layout_height="300dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             android:src="@drawable/ic_error_load"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:visibility="@{viewModel.isEmptyResult}"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibility="@{viewModel.isEmptyResult}" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_retry"
@@ -57,9 +100,9 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_medium"
             android:onClick="@{()-> viewModel.fetchAllProducts()}"
-            app:layout_constraintTop_toBottomOf="@id/img_error"
             android:text="@string/retry"
-            app:visibility="@{viewModel.isEmptyResult}"/>
+            app:layout_constraintTop_toBottomOf="@id/img_error"
+            app:visibility="@{viewModel.isEmptyResult}" />
 
     </com.varol.testcase.internal.view.RootConstraintLayout>
 
